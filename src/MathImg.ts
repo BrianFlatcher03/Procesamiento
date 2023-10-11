@@ -209,12 +209,14 @@ export class MathImg {
     return Math.min(255 * Math.pow(pixel / 250, factor), 255);
   }
 
+ 
   public static toUmbral(img: ImageType, umbral: number): number[][][] {
     //variable que guarda el arreglo 3d de la imagen de color
     var arrImage: number[][][] = img.getArrayImg();
     //variable donde guardamos la salida
     var sal: number[][][] = this.initArray(img.getWidth(), img.getHeight());
     var prom;
+    
     for (let i = 0; i < img.getHeight(); i++) {
       for (let j = 0; j < img.getWidth(); j++) {
         prom = (arrImage[0][i][j] + arrImage[1][i][j] + arrImage[2][i][j]) / 3;
@@ -227,6 +229,34 @@ export class MathImg {
         /*sal[0][i][j] = prom > umbral ? 255 : 0;
         sal[1][i][j] = sal[0][i][j];
         sal[2][i][j] = sal[0][i][j];*/
+      }
+    }
+    return sal;
+  }
+  public static toRealce(img: ImageType, realce: number): number[][][] {
+    //variable que guarda el arreglo 3d de la imagen de color
+    var arrImage: number[][][] = img.getArrayImg();
+    //variable donde guardamos la salida
+    var sal: number[][][] = this.initArray(img.getWidth(), img.getHeight());
+    var prom;
+    var prom2;
+    
+ 
+    
+    for (let i = 0; i < img.getHeight(); i++) {
+      for (let j = 0; j < img.getWidth(); j++) {
+
+        prom = (0.299 * arrImage[0][i][j] + 0.587 * arrImage[1][i][j] + 0.114 * arrImage[2][i][j]) ;
+
+        prom2 = (arrImage[0][i][j] + arrImage[1][i][j] + arrImage[2][i][j]/3);
+
+        if (prom > realce) {
+          sal[0][i][j] =  prom + (prom2 + 5);
+          sal[1][i][j] =  prom + (prom2 + 5);
+          sal[2][i][j] =  prom + (prom2 + 5);
+        }
+          
+       
       }
     }
     return sal;
