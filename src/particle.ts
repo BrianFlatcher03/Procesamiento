@@ -59,6 +59,12 @@ export class Particle {
   }
 }
 
+
+///
+
+
+
+/////////
 export class ParticleText {
   protected x: number;
   protected y: number;

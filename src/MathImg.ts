@@ -152,6 +152,47 @@ export class MathImg {
     return sal;
   }
   
+  public static toTricolorHorizontal(img: ImageType): number[][][] {
+    //variable que guarda el arreglo 3d de la imagen de color
+    var arrImage = img.getArrayImg();
+    //variable donde guardamos la salida
+    var sal = this.initArray(img.getWidth(), img.getHeight());
+    let inicio = 0, termino = img.getWidth() / 3;
+    console.log(inicio, termino);
+
+    for (let i = inicio; i < termino; i++) {
+    for (let j = 0; j < img.getHeight(); j++) {
+      
+        sal[0][i][j] = 0;
+        sal[1][i][j] = arrImage[1][i][j];
+        sal[2][i][j] = 0;
+      }
+    }
+
+    inicio = termino;
+    termino = 2 * img.getWidth() / 3;
+    for (let i = inicio; i < termino; i++) {
+    for (let j = 0; j < img.getHeight(); j++) {
+     
+        sal[0][i][j] = arrImage[0][i][j];
+        sal[1][i][j] = arrImage[0][i][j];
+        sal[2][i][j] = arrImage[0][i][j];
+      }
+    }
+    
+    inicio = termino;
+    termino = img.getWidth();
+    for (let i = inicio; i < termino; i++) {
+    for (let j = 0; j < img.getHeight(); j++) {
+      
+        sal[0][i][j] = arrImage[0][i][j];
+        sal[1][i][j] = 0;
+        sal[2][i][j] = 0;
+      }
+    }
+    return sal;
+  }
+
   public static correctionGamma(img: ImageType, factores: number[]): number[][][] {
     //variable que guarda el arreglo 3d de la imagen de color
     var arrImage = img.getArrayImg();
@@ -1232,4 +1273,105 @@ export class MathImg {
   */
     return sal;
   }
+
+
+  // Definir la clase ImageType (asumiendo que tienes una implementación)
+
+
+
+
+ 
+
+  public static tomorado(img: ImageType): number[][][] {
+    //variable que guarda el arreglo 3d de la imagen de color
+    var arrImage = img.getArrayImg();
+    //variable donde guardamos la salida
+    var sal = this.initArray(img.getWidth(), img.getHeight());
+    for (let i = 0; i < img.getHeight(); i++) {
+      for (let j = 0; j < img.getWidth(); j++) {
+        sal[0][i][j] = arrImage[0][i][j];
+        sal[1][i][j] = 0;
+        sal[2][i][j] = arrImage[2][i][j];
+      }
+    }
+    return sal;
+  }
+
+
+  public static tomulticolor(img: ImageType): number[][][] {
+    //variable que guarda el arreglo 3d de la imagen de color
+    var arrImage = img.getArrayImg();
+    //variable donde guardamos la salida
+    var sal = this.initArray(img.getWidth(), img.getHeight());
+    let inicio = 0, termino = img.getWidth() / 6;
+    console.log(inicio, termino);
+
+    for (let i = inicio; i < termino; i++) {
+    for (let j = 0; j < img.getHeight(); j++) {
+      
+        sal[0][i][j] = arrImage[0][i][j];
+        sal[1][i][j] = 0;
+        sal[2][i][j] = 0;
+      }
+    }
+
+    inicio = termino;
+    termino = 2 * img.getWidth() / 6;
+    for (let i = inicio; i < termino; i++) {
+    for (let j = 0; j < img.getHeight(); j++) {
+     
+        sal[0][i][j] = 0;
+        sal[1][i][j] = arrImage[1][i][j];
+        sal[2][i][j] = 0;
+      }
+    }
+    
+    inicio = termino;
+   termino = 3 * img.getWidth() / 6;
+
+    for (let i = inicio; i < termino; i++) {
+    for (let j = 0; j < img.getHeight(); j++) {
+      
+        sal[0][i][j] = 0;
+        sal[1][i][j] = 0;
+        sal[2][i][j] = arrImage[2][i][j];
+      }
+    }
+    inicio = termino;
+    termino = 4 * img.getWidth() / 6;
+    for (let i = inicio; i < termino; i++) {
+      for (let j = 0; j < img.getHeight(); j++) {
+        
+          sal[0][i][j] = arrImage[0][i][j];
+          sal[1][i][j] = arrImage[1][i][j];
+          sal[2][i][j] = 0;
+        }
+      }
+  
+      inicio = termino;
+      termino = 5 * img.getWidth() / 6;
+      for (let i = inicio; i < termino; i++) {
+      for (let j = 0; j < img.getHeight(); j++) {
+       
+          sal[0][i][j] = 0;
+          sal[1][i][j] = arrImage[1][i][j];
+          sal[2][i][j] = arrImage[2][i][j];
+        }
+      }
+      
+      inicio = termino;
+      termino = img.getWidth();
+      for (let i = inicio; i < termino; i++) {
+      for (let j = 0; j < img.getHeight(); j++) {
+        
+          sal[0][i][j] = arrImage[0][i][j];
+          sal[1][i][j] = 0;
+          sal[2][i][j] = arrImage[2][i][j];
+        }
+      }
+   
+    
+    return sal;
+  }
+
 }

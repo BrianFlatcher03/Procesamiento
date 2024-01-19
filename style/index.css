@@ -1,5 +1,5 @@
 * {
-    background-color: lightgray;
+    background-color: rgb(188, 202, 245);
     padding: 0;
     margin: 0;
 }
@@ -13,7 +13,7 @@
 }
 
 .header{
-  width: 1300px;
+  width: 1600px;
   font-family: Arial, Helvetica, sans-serif;
   grid-area: header;
 }
@@ -22,14 +22,14 @@ ul{
   list-style: none;
 }
 .nav li span{
-  background-color: black;
-  color: white;
+  background-color: rgb(23, 75, 186);
+  color: rgb(255, 255, 255);
   text-decoration: none;
-  padding: 10px 15px;
+  padding: 10px 24px;
   display: block;
 }
 .nav li span:hover{
-  background-color: darkolivegreen;
+  background-color: rgb(9, 12, 73);
   cursor: pointer;
 }
 .nav > li{
@@ -37,8 +37,8 @@ ul{
 }
 
 .nav ul li label{
-  background-color: black;
-  color: white;
+  background-color: rgb(40, 69, 149);
+  color: rgb(255, 255, 255);
   padding: 10px 15px;
 }
 .nav li ul{
@@ -57,27 +57,16 @@ ul{
   top: 0;
 }
 .im-container1{
+
   grid-area: img-container1;
+  
 }
 .im-container2{
   grid-area: img-container2;
+  color: rgb(255, 255, 255);
 }
-.im-container3{
-  grid-area: img-container3;
-}
-.im-container4{
-  grid-area: img-container4;
-}
-.im-container5{
-  grid-area: img-container5;
-}
-.im-container6{
-  grid-area: img-container6;
-}
-output li{
-  font-size: 10px;
-}
+
 #color{
   padding: 2px 20px;
-  background-color: black;
+  background-color: rgba(255, 255, 255, 0);
 }

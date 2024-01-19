@@ -3,6 +3,7 @@ import { ImageLocal } from "./ImageLocal.js";
 import { ImageType } from "./ImageType.js";
 import { MathImg } from "./MathImg.js";
 import { Particle } from "./particle.js";
+
 import { ParticleText } from "./particle.js";
 import { CanvasLocal } from './canvasLocal.js';
 
@@ -31,6 +32,8 @@ lienzo4 = <HTMLCanvasElement>document.getElementById('img4');
 pantalla4 = lienzo4.getContext("2d");
 
 var dropZone = lienzo1;//document.getElementById('img1');
+var imgLocal: ImageLocal = new ImageLocal(pantalla1);
+imgLocal.getImage().onload = imgLocal.onload;
 var imgLocal: ImageLocal = new ImageLocal(pantalla1);
 imgLocal.getImage().onload = imgLocal.onload;
 var imgLocal4: ImageLocal = new ImageLocal(pantalla4);
@@ -64,6 +67,10 @@ function convertirAAzul(evt: any): void{
 function convertirTricolor(evt: any): void{
   var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
   imagenSal.imageArray2DtoData(pantalla2, MathImg.toTricolor(imagenSal));
+}
+function convertirTricolorHorizontal(evt: any): void{
+  var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.toTricolorHorizontal(imagenSal));
 }
 ////////////hasta aqui
 function correccionGamma(evt: any): void{
@@ -313,8 +320,8 @@ function histogramas(evt: any): void{
   const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
   let canvas1: HTMLCanvasElement = lienzo2;
   let graphics1: CanvasRenderingContext2D = pantalla2;
-  let canvas2: HTMLCanvasElement = lienzo4;
-  let graphics2: CanvasRenderingContext2D = pantalla4;
+  let canvas2: HTMLCanvasElement = lienzo2;
+  let graphics2: CanvasRenderingContext2D = pantalla2;
 
   let hist = MathImg.hist(imagenSal);
   const miCanvas1:CanvasLocal = new CanvasLocal(graphics1, canvas1, hist);
@@ -423,6 +430,62 @@ function tAfin(evt: any): void{
   imagenSal.imageArray2DtoData(pantalla2, MathImg.tAfin(imagenSal, factores));
 }
 
+
+
+
+
+
+
+
+const numberOfParticles3 = 50;
+
+
+function init3() {
+  //init
+  var imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  let tmp = MathImg.relativeBrightness(imagenSal);
+  w = imagenSal.getWidth();
+  h = imagenSal.getHeight();
+  for (let i = 0; i < numberOfParticles; i++){
+    particlesArray.push(new Particle (h, w, ctx, tmp));
+  }
+}
+
+function animate3() {
+  ctx.drawImage(imgLocal.getImage(), 0, 0, h , w  );
+  ctx.globalAlpha = 0.01  ;
+ 
+  ctx.fillRect(0, h, h, w);
+  for (let i = 0; i < particlesArray.length; i++){
+    particlesArray[i].update();
+    particlesArray[i].draw();
+  }
+  requestAnimationFrame(animate3);
+}
+
+
+
+function rain3(evt: any): void { 
+  init3();
+  animate3();
+}
+
+
+
+
+
+function tomorado(evt: any): void{
+  var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.tomorado(imagenSal));
+}
+function tomulticolor(evt: any): void{
+  var imagenSal:ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.tomulticolor(imagenSal));
+}
+
+
+
+
 lienzo1.addEventListener('mousemove', handleMouse);
  
 lienzo1.addEventListener("mousemove", imgLocal.drawSmallImg);
@@ -438,6 +501,8 @@ document.getElementById("op-rojo").addEventListener('click', convertirARojo, fal
 document.getElementById("op-verde").addEventListener('click', convertirAVerde, false);
 document.getElementById("op-azul").addEventListener('click', convertirAAzul, false);
 document.getElementById("op-tricolor").addEventListener('click', convertirTricolor, false);
+document.getElementById("op-tricolorhorizontal").addEventListener('click', convertirTricolorHorizontal, false);
+
 document.getElementById("op-gamma").addEventListener('click', correccionGamma, false);
 document.getElementById("op-umbral1").addEventListener('click', umbralizado, false);
 document.getElementById("op-umbral-2-limites").addEventListener('click', umbral2limites, false);
@@ -499,3 +564,9 @@ document.getElementById("op-rotacion").addEventListener('click', rotarImagen2, f
 document.getElementById("op-shearingX").addEventListener('click', shearingX, false);
 document.getElementById("op-shearingY").addEventListener('click', shearingY, false);
 document.getElementById("op-afin").addEventListener('click', tAfin, false);
+
+//Arte ASCII
+
+document.getElementById("op-morado").addEventListener('click', tomorado, false);
+document.getElementById("op-multicolor").addEventListener('click', tomulticolor, false);
+document.getElementById("op-interferencia").addEventListener('click', rain3, false);

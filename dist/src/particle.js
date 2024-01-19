@@ -40,6 +40,8 @@ var Particle = /** @class */ (function () {
     return Particle;
 }());
 export { Particle };
+///
+/////////
 var ParticleText = /** @class */ (function () {
     function ParticleText(x, y, screenCanvas, mapImg) {
         this.ctx = screenCanvas;
